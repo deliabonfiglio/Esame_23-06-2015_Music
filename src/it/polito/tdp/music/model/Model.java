@@ -60,8 +60,7 @@ public class Model {
 					int peso = dao.getNumeroArtisti(c1, c2, mese);
 						System.out.println(peso+"\n");
 					if(peso>0){
-						DefaultWeightedEdge e = graph.addEdge(c1, c2);
-						graph.setEdgeWeight(e, peso);
+						Graphs.addEdgeWithVertices(graph, c1, c2, peso);
 					}
 				}
 			}
@@ -73,17 +72,9 @@ public class Model {
 	public int getMaxDistance(int month) {
 		int max = Integer.MIN_VALUE;
 		
-		for(Country ctemp: graph.vertexSet()){
-			
-			List<Country> vicini = Graphs.neighborListOf(graph, ctemp);
-			
-			for(Country cvicino: vicini){
-				int grado = graph.degreeOf(cvicino);
-				
-				if(grado > max){
-					max = grado;
-				}
-			}
+		for(DefaultWeightedEdge e : graph.edgeSet()){
+			if(graph.getEdgeWeight(e)>max)
+				max=(int) graph.getEdgeWeight(e);
 		}
 
 		return max;
