@@ -76,6 +76,7 @@ public class Model {
 			if(graph.getEdgeWeight(e)>max)
 				max=(int) graph.getEdgeWeight(e);
 		}
+		
 		return max;
 	}
 
